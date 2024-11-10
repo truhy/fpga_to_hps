@@ -1,0 +1,267 @@
+IP Upgrade report for acp_stream
+Fri Mar 15 20:22:21 2024
+Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. IP Upgrade Summary
+  3. Successfully Upgraded IP Components
+  4. IP Upgrade Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2023  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-------------------------------------------------------------------------------+
+; IP Upgrade Summary                                                            ;
++------------------------------+------------------------------------------------+
+; IP Components Upgrade Status ; Passed - Fri Mar 15 20:22:21 2024              ;
+; Quartus Prime Version        ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
+; Revision Name                ; acp_stream                                     ;
+; Top-level Entity Name        ; top                                            ;
+; Family                       ; Cyclone V                                      ;
++------------------------------+------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Successfully Upgraded IP Components                                                                                                                 ;
++-------------+----------------+---------+-------------------------------------+----------------------+-------------------------------------+---------+
+; Entity Name ; Component Name ; Version ; Original Source File                ; Generation File Path ; New Source File                     ; Message ;
++-------------+----------------+---------+-------------------------------------+----------------------+-------------------------------------+---------+
+; soc_system  ; Qsys           ; 22.1    ; soc_system/synthesis/soc_system.qip ; soc_system.qsys      ; soc_system/synthesis/soc_system.qip ;         ;
++-------------+----------------+---------+-------------------------------------+----------------------+-------------------------------------+---------+
+
+
++---------------------+
+; IP Upgrade Messages ;
++---------------------+
+Info (11902): Backing up file "soc_system.qsys" to "soc_system.BAK.qsys"
+Info (11902): Backing up file "soc_system/synthesis/soc_system.v" to "soc_system.BAK.v"
+Info (11837): Started upgrading IP component Qsys with file "soc_system.qsys"
+Info: 2024.03.15.20:19:59 Info: Starting to upgrade the IP cores in the Platform Designer system
+Info: 2024.03.15.20:19:59 Info: Finished upgrading the ip cores
+Info: 2024.03.15.20:20:16 Info: Saving generation log to D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system
+Info: 2024.03.15.20:20:16 Info: Starting: Create simulation model
+Info: 2024.03.15.20:20:16 Info: qsys-generate D:\Documents\Programming\FPGA\de10nano-c-verilog\acp_stream\acp_stream_verilog\soc_system.qsys --simulation=VERILOG --allow-mixed-language-simulation --output-directory=D:\Documents\Programming\FPGA\de10nano-c-verilog\acp_stream\acp_stream_verilog\soc_system\simulation --family="Cyclone V" --part=5CSEBA6U23I7
+Info: 2024.03.15.20:20:16 Info: Loading acp_stream_verilog
+Info: 2024.03.15.20:20:16 Info: Reading input file
+Info: 2024.03.15.20:20:16 Info: Adding clk_0 [clock_source 23.1]
+Info: 2024.03.15.20:20:16 Info: Parameterizing module clk_0
+Info: 2024.03.15.20:20:16 Info: Adding clock_bridge_0 [altera_clock_bridge 23.1]
+Info: 2024.03.15.20:20:16 Info: Parameterizing module clock_bridge_0
+Info: 2024.03.15.20:20:16 Info: Adding hps_0 [altera_hps 23.1]
+Info: 2024.03.15.20:20:16 Info: Parameterizing module hps_0
+Info: 2024.03.15.20:20:16 Info: Adding pio_stream_addr [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:20:16 Info: Parameterizing module pio_stream_addr
+Info: 2024.03.15.20:20:16 Info: Adding pio_stream_size [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:20:16 Info: Parameterizing module pio_stream_size
+Info: 2024.03.15.20:20:16 Info: Adding pio_stream_trigger [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:20:16 Info: Parameterizing module pio_stream_trigger
+Info: 2024.03.15.20:20:16 Info: Adding pll_0 [altera_pll 23.1]
+Info: 2024.03.15.20:20:16 Info: Parameterizing module pll_0
+Info: 2024.03.15.20:20:16 Info: Building connections
+Info: 2024.03.15.20:20:16 Info: Parameterizing connections
+Info: 2024.03.15.20:20:16 Info: Validating
+Info: 2024.03.15.20:20:23 Info: Done reading input file
+Info: 2024.03.15.20:20:27 Info: soc_system.hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2024.03.15.20:20:27 Info: soc_system.hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2024.03.15.20:20:27 Info: soc_system.pio_stream_trigger: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: 2024.03.15.20:20:27 Info: soc_system.pll_0: The legal reference clock frequency is 5.0 MHz..700.0 MHz
+Info: 2024.03.15.20:20:27 Info: soc_system.pll_0: Able to implement PLL with user settings
+Info: 2024.03.15.20:20:28 Info: soc_system: Generating soc_system "soc_system" for SIM_VERILOG
+Info: 2024.03.15.20:20:39 Info: hps_0: "Running  for module: hps_0"
+Info: 2024.03.15.20:20:39 Info: hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2024.03.15.20:20:40 Info: hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2024.03.15.20:20:43 Info: hps_0: "soc_system" instantiated altera_hps "hps_0"
+Info: 2024.03.15.20:20:43 Info: pio_stream_addr: Starting RTL generation for module 'soc_system_pio_stream_addr'
+Info: 2024.03.15.20:20:43 Info: pio_stream_addr:   Generation command is [exec C:/intelfpga_lite/23.1std/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/23.1std/quartus/bin64/perl/lib -I C:/intelfpga_lite/23.1std/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/23.1std/quartus/sopc_builder/bin -I C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_stream_addr --dir=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0002_pio_stream_addr_gen/ --quartus_dir=C:/intelfpga_lite/23.1std/quartus --verilog --config=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0002_pio_stream_addr_gen//soc_system_pio_stream_addr_component_configuration.pl  --do_build_sim=1    --sim_dir=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0002_pio_stream_addr_gen
+Info: 2024.03.15.20:20:44 Info: pio_stream_addr: Done RTL generation for module 'soc_system_pio_stream_addr'
+Info: 2024.03.15.20:20:44 Info: pio_stream_addr: "soc_system" instantiated altera_avalon_pio "pio_stream_addr"
+Info: 2024.03.15.20:20:44 Info: pio_stream_trigger: Starting RTL generation for module 'soc_system_pio_stream_trigger'
+Info: 2024.03.15.20:20:44 Info: pio_stream_trigger:   Generation command is [exec C:/intelfpga_lite/23.1std/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/23.1std/quartus/bin64/perl/lib -I C:/intelfpga_lite/23.1std/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/23.1std/quartus/sopc_builder/bin -I C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_stream_trigger --dir=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0003_pio_stream_trigger_gen/ --quartus_dir=C:/intelfpga_lite/23.1std/quartus --verilog --config=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0003_pio_stream_trigger_gen//soc_system_pio_stream_trigger_component_configuration.pl  --do_build_sim=1    --sim_dir=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0003_pio_stream_trigger_gen
+Info: 2024.03.15.20:20:44 Info: pio_stream_trigger: Done RTL generation for module 'soc_system_pio_stream_trigger'
+Info: 2024.03.15.20:20:44 Info: pio_stream_trigger: "soc_system" instantiated altera_avalon_pio "pio_stream_trigger"
+Info: 2024.03.15.20:20:44 Info: pll_0: Generating simgen model
+Info: Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4661 megabytes
+    Info: Processing ended: Fri Mar 15 20:20:53 2024
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:01
+Info: 2024.03.15.20:20:55 Info: pll_0: Simgen was successful
+Info: 2024.03.15.20:20:55 Info: pll_0: "soc_system" instantiated altera_pll "pll_0"
+Info: 2024.03.15.20:20:58 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: 2024.03.15.20:20:59 Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: 2024.03.15.20:21:00 Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: 2024.03.15.20:21:02 Info: mm_interconnect_0: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: 2024.03.15.20:21:02 Info: rst_controller: "soc_system" instantiated altera_reset_controller "rst_controller"
+Info: 2024.03.15.20:21:02 Info: fpga_interfaces: "hps_0" instantiated altera_interface_generator "fpga_interfaces"
+Info: 2024.03.15.20:21:04 Info: hps_io: "hps_0" instantiated altera_hps_io "hps_io"
+Info: 2024.03.15.20:21:04 Info: pio_stream_trigger_s1_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "pio_stream_trigger_s1_translator"
+Info: 2024.03.15.20:21:04 Info: hps_0_h2f_lw_axi_master_agent: "mm_interconnect_0" instantiated altera_merlin_axi_master_ni "hps_0_h2f_lw_axi_master_agent"
+Info: 2024.03.15.20:21:04 Info: pio_stream_trigger_s1_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "pio_stream_trigger_s1_agent"
+Info: 2024.03.15.20:21:04 Info: pio_stream_trigger_s1_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "pio_stream_trigger_s1_agent_rsp_fifo"
+Info: 2024.03.15.20:21:04 Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: 2024.03.15.20:21:04 Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: 2024.03.15.20:21:04 Info: hps_0_h2f_lw_axi_master_wr_limiter: "mm_interconnect_0" instantiated altera_merlin_traffic_limiter "hps_0_h2f_lw_axi_master_wr_limiter"
+Info: 2024.03.15.20:21:04 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:04 Info: pio_stream_trigger_s1_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "pio_stream_trigger_s1_burst_adapter"
+Info: 2024.03.15.20:21:04 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:04 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:04 Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: 2024.03.15.20:21:04 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: 2024.03.15.20:21:04 Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: 2024.03.15.20:21:04 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: 2024.03.15.20:21:04 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:05 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: 2024.03.15.20:21:05 Info: border: "hps_io" instantiated altera_interface_generator "border"
+Info: 2024.03.15.20:21:05 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:05 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:05 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:05 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:05 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:05 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:05 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation/submodules
+Info: 2024.03.15.20:21:05 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: 2024.03.15.20:21:05 Info: soc_system: Done "soc_system" with 24 modules, 51 files
+Info: 2024.03.15.20:21:05 Info: qsys-generate succeeded.
+Info: 2024.03.15.20:21:05 Info: Finished: Create simulation model
+Info: 2024.03.15.20:21:05 Info: Starting: Create Modelsim Project.
+Info: 2024.03.15.20:21:05 Info: sim-script-gen --spd=D:\Documents\Programming\FPGA\de10nano-c-verilog\acp_stream\acp_stream_verilog\soc_system\soc_system.spd --output-directory=D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation
+Info: 2024.03.15.20:21:05 Info: Doing: ip-make-simscript --spd=D:\Documents\Programming\FPGA\de10nano-c-verilog\acp_stream\acp_stream_verilog\soc_system\soc_system.spd --output-directory=D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation
+Info: 2024.03.15.20:21:06 Info: Generating the following file(s) for RIVIERA simulator in D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation
+Info: 2024.03.15.20:21:06 Info:     aldec
+Info: 2024.03.15.20:21:06 Info: Generating the following file(s) for MODELSIM simulator in D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation
+Info: 2024.03.15.20:21:06 Info:     mentor
+Info: 2024.03.15.20:21:06 Info: For information on how to simulate your IP, see the explanatory comments in the simulator-specific subdirectories under D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/simulation
+Info: 2024.03.15.20:21:06 Info: Regenerate these scripts whenever you make any change to any Quartus-generated IP in your project.
+Info: 2024.03.15.20:21:06 Info: Finished: Create Modelsim Project.
+Info: 2024.03.15.20:21:06 Info: Starting: Create block symbol file (.bsf)
+Info: 2024.03.15.20:21:06 Info: qsys-generate D:\Documents\Programming\FPGA\de10nano-c-verilog\acp_stream\acp_stream_verilog\soc_system.qsys --block-symbol-file --output-directory=D:\Documents\Programming\FPGA\de10nano-c-verilog\acp_stream\acp_stream_verilog\soc_system --family="Cyclone V" --part=5CSEBA6U23I7
+Info: 2024.03.15.20:21:06 Info: Loading acp_stream_verilog
+Info: 2024.03.15.20:21:06 Info: Reading input file
+Info: 2024.03.15.20:21:06 Info: Adding clk_0 [clock_source 23.1]
+Info: 2024.03.15.20:21:06 Info: Parameterizing module clk_0
+Info: 2024.03.15.20:21:06 Info: Adding clock_bridge_0 [altera_clock_bridge 23.1]
+Info: 2024.03.15.20:21:06 Info: Parameterizing module clock_bridge_0
+Info: 2024.03.15.20:21:06 Info: Adding hps_0 [altera_hps 23.1]
+Info: 2024.03.15.20:21:06 Info: Parameterizing module hps_0
+Info: 2024.03.15.20:21:06 Info: Adding pio_stream_addr [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:21:06 Info: Parameterizing module pio_stream_addr
+Info: 2024.03.15.20:21:06 Info: Adding pio_stream_size [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:21:06 Info: Parameterizing module pio_stream_size
+Info: 2024.03.15.20:21:06 Info: Adding pio_stream_trigger [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:21:06 Info: Parameterizing module pio_stream_trigger
+Info: 2024.03.15.20:21:06 Info: Adding pll_0 [altera_pll 23.1]
+Info: 2024.03.15.20:21:06 Info: Parameterizing module pll_0
+Info: 2024.03.15.20:21:06 Info: Building connections
+Info: 2024.03.15.20:21:06 Info: Parameterizing connections
+Info: 2024.03.15.20:21:06 Info: Validating
+Info: 2024.03.15.20:21:13 Info: Done reading input file
+Info: 2024.03.15.20:21:17 Info: soc_system.hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2024.03.15.20:21:17 Info: soc_system.hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2024.03.15.20:21:17 Info: soc_system.pio_stream_trigger: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: 2024.03.15.20:21:17 Info: soc_system.pll_0: The legal reference clock frequency is 5.0 MHz..700.0 MHz
+Info: 2024.03.15.20:21:17 Info: soc_system.pll_0: Able to implement PLL with user settings
+Info: 2024.03.15.20:21:17 Info: qsys-generate succeeded.
+Info: 2024.03.15.20:21:17 Info: Finished: Create block symbol file (.bsf)
+Info: 2024.03.15.20:21:17 Info:
+Info: 2024.03.15.20:21:17 Info: Starting: Create HDL design files for synthesis
+Info: 2024.03.15.20:21:17 Info: qsys-generate D:\Documents\Programming\FPGA\de10nano-c-verilog\acp_stream\acp_stream_verilog\soc_system.qsys --synthesis=VERILOG --output-directory=D:\Documents\Programming\FPGA\de10nano-c-verilog\acp_stream\acp_stream_verilog\soc_system\synthesis --family="Cyclone V" --part=5CSEBA6U23I7
+Info: 2024.03.15.20:21:17 Info: Loading acp_stream_verilog
+Info: 2024.03.15.20:21:18 Info: Reading input file
+Info: 2024.03.15.20:21:18 Info: Adding clk_0 [clock_source 23.1]
+Info: 2024.03.15.20:21:18 Info: Parameterizing module clk_0
+Info: 2024.03.15.20:21:18 Info: Adding clock_bridge_0 [altera_clock_bridge 23.1]
+Info: 2024.03.15.20:21:18 Info: Parameterizing module clock_bridge_0
+Info: 2024.03.15.20:21:18 Info: Adding hps_0 [altera_hps 23.1]
+Info: 2024.03.15.20:21:18 Info: Parameterizing module hps_0
+Info: 2024.03.15.20:21:18 Info: Adding pio_stream_addr [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:21:18 Info: Parameterizing module pio_stream_addr
+Info: 2024.03.15.20:21:18 Info: Adding pio_stream_size [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:21:18 Info: Parameterizing module pio_stream_size
+Info: 2024.03.15.20:21:18 Info: Adding pio_stream_trigger [altera_avalon_pio 23.1]
+Info: 2024.03.15.20:21:18 Info: Parameterizing module pio_stream_trigger
+Info: 2024.03.15.20:21:18 Info: Adding pll_0 [altera_pll 23.1]
+Info: 2024.03.15.20:21:18 Info: Parameterizing module pll_0
+Info: 2024.03.15.20:21:18 Info: Building connections
+Info: 2024.03.15.20:21:18 Info: Parameterizing connections
+Info: 2024.03.15.20:21:18 Info: Validating
+Info: 2024.03.15.20:21:24 Info: Done reading input file
+Info: 2024.03.15.20:21:28 Info: soc_system.hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2024.03.15.20:21:28 Info: soc_system.hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2024.03.15.20:21:28 Info: soc_system.pio_stream_trigger: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: 2024.03.15.20:21:28 Info: soc_system.pll_0: The legal reference clock frequency is 5.0 MHz..700.0 MHz
+Info: 2024.03.15.20:21:28 Info: soc_system.pll_0: Able to implement PLL with user settings
+Info: 2024.03.15.20:21:29 Info: soc_system: Generating soc_system "soc_system" for QUARTUS_SYNTH
+Info: 2024.03.15.20:21:39 Info: hps_0: "Running  for module: hps_0"
+Info: 2024.03.15.20:21:39 Info: hps_0: HPS Main PLL counter settings: n = 0  m = 63
+Info: 2024.03.15.20:21:39 Info: hps_0: HPS peripherial PLL counter settings: n = 0  m = 39
+Info: 2024.03.15.20:21:43 Info: hps_0: "soc_system" instantiated altera_hps "hps_0"
+Info: 2024.03.15.20:21:43 Info: pio_stream_addr: Starting RTL generation for module 'soc_system_pio_stream_addr'
+Info: 2024.03.15.20:21:43 Info: pio_stream_addr:   Generation command is [exec C:/intelfpga_lite/23.1std/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/23.1std/quartus/bin64/perl/lib -I C:/intelfpga_lite/23.1std/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/23.1std/quartus/sopc_builder/bin -I C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_stream_addr --dir=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0022_pio_stream_addr_gen/ --quartus_dir=C:/intelfpga_lite/23.1std/quartus --verilog --config=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0022_pio_stream_addr_gen/
+Info: 2024.03.15.20:21:43 Info: pio_stream_addr: Done RTL generation for module 'soc_system_pio_stream_addr'
+Info: 2024.03.15.20:21:43 Info: pio_stream_addr: "soc_system" instantiated altera_avalon_pio "pio_stream_addr"
+Info: 2024.03.15.20:21:43 Info: pio_stream_trigger: Starting RTL generation for module 'soc_system_pio_stream_trigger'
+Info: 2024.03.15.20:21:43 Info: pio_stream_trigger:   Generation command is [exec C:/intelfpga_lite/23.1std/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/23.1std/quartus/bin64/perl/lib -I C:/intelfpga_lite/23.1std/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/23.1std/quartus/sopc_builder/bin -I C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/23.1std/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_stream_trigger --dir=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0023_pio_stream_trigger_gen/ --quartus_dir=C:/intelfpga_lite/23.1std/quartus --verilog --config=C:/Users/Truong/AppData/Local/Temp/alt9797_3335071403252740229.dir/0023_pio_stream_trigger_gen/
+Info: 2024.03.15.20:21:43 Info: pio_stream_trigger: Done RTL generation for module 'soc_system_pio_stream_trigger'
+Info: 2024.03.15.20:21:43 Info: pio_stream_trigger: "soc_system" instantiated altera_avalon_pio "pio_stream_trigger"
+Info: 2024.03.15.20:21:43 Info: pll_0: "soc_system" instantiated altera_pll "pll_0"
+Info: 2024.03.15.20:21:46 Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: 2024.03.15.20:21:47 Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: 2024.03.15.20:21:48 Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: 2024.03.15.20:21:50 Info: mm_interconnect_0: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: 2024.03.15.20:21:50 Info: rst_controller: "soc_system" instantiated altera_reset_controller "rst_controller"
+Info: 2024.03.15.20:21:50 Info: fpga_interfaces: "hps_0" instantiated altera_interface_generator "fpga_interfaces"
+Info: 2024.03.15.20:21:51 Info: hps_io: "hps_0" instantiated altera_hps_io "hps_io"
+Info: 2024.03.15.20:21:51 Info: pio_stream_trigger_s1_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "pio_stream_trigger_s1_translator"
+Info: 2024.03.15.20:21:51 Info: hps_0_h2f_lw_axi_master_agent: "mm_interconnect_0" instantiated altera_merlin_axi_master_ni "hps_0_h2f_lw_axi_master_agent"
+Info: 2024.03.15.20:21:51 Info: pio_stream_trigger_s1_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "pio_stream_trigger_s1_agent"
+Info: 2024.03.15.20:21:51 Info: pio_stream_trigger_s1_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "pio_stream_trigger_s1_agent_rsp_fifo"
+Info: 2024.03.15.20:21:51 Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: 2024.03.15.20:21:51 Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: 2024.03.15.20:21:51 Info: hps_0_h2f_lw_axi_master_wr_limiter: "mm_interconnect_0" instantiated altera_merlin_traffic_limiter "hps_0_h2f_lw_axi_master_wr_limiter"
+Info: 2024.03.15.20:21:51 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/synthesis/submodules
+Info: 2024.03.15.20:21:51 Info: pio_stream_trigger_s1_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "pio_stream_trigger_s1_burst_adapter"
+Info: 2024.03.15.20:21:51 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/synthesis/submodules
+Info: 2024.03.15.20:21:51 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/synthesis/submodules
+Info: 2024.03.15.20:21:51 Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: 2024.03.15.20:21:51 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: 2024.03.15.20:21:51 Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: 2024.03.15.20:21:51 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: 2024.03.15.20:21:51 Info: Reusing file D:/Documents/Programming/FPGA/de10nano-c-verilog/acp_stream/acp_stream_verilog/soc_system/synthesis/submodules
+Info: 2024.03.15.20:21:53 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: 2024.03.15.20:22:15 Info: border: "hps_io" instantiated altera_interface_generator "border"
+Info: 2024.03.15.20:22:15 Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: 2024.03.15.20:22:15 Info: soc_system: Done "soc_system" with 24 modules, 82 files
+Info: 2024.03.15.20:22:15 Info: qsys-generate succeeded.
+Info: 2024.03.15.20:22:15 Info: Finished: Create HDL design files for synthesis
+Info (11131): Completed upgrading IP component Qsys with file "soc_system.qsys"
+Info (23030): Evaluation of Tcl script c:/intelfpga_lite/23.1std/quartus/common/tcl/internal/ip_regen/ip_regen.tcl was successful
+Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4874 megabytes
+    Info: Processing ended: Fri Mar 15 20:22:26 2024
+    Info: Elapsed time: 00:02:54
+    Info: Total CPU time (on all processors): 00:03:53
+
+
