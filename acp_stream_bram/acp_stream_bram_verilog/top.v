@@ -622,12 +622,12 @@ module top(
 	// ================
 	
 	// PIO are in viewpoint of the HPS so out = HPS output signal to FPGA, in = FPGA input signal to HPS
-	assign pio_s0_rdy_in    = pio_s0_rdy_out;               // Loop back
-	assign pio_s0_addr_in   = pio_s0_addr_out;              // Loop back
-	assign pio_s0_len_in    = pio_s0_len_out;               // Loop back
+	assign pio_s0_rdy_in    = pio_s0_rdy_out;   // Loop back
+	assign pio_s0_addr_in   = pio_s0_addr_out;  // Loop back
+	assign pio_s0_len_in    = pio_s0_len_out;   // Loop back
 	
 	// Assign F2H interrupt receivers to triggers
-	assign f2h_irq0         = { {31{1'b0}}, irq_trigger };  // Connect bit0 (IRQ ID 72) to PIO0 IRQ output signal, and the remaining IRQs to 0
+	assign f2h_irq0         = { {31{1'b0}}, irq_trigger };  // Connect bit0 (IRQ ID 72) to trigger signal, and the remaining IRQs to 0
 	assign f2h_irq1         = 'b0;                          // Connect unused IRQs to 0
 	
 	// Note, I have not found a way to easily handle the AXI-3 autoincrement 4K (4096) boundary restriction, i.e. the autoincrement should not pass a 4K boundary
