@@ -40,7 +40,7 @@ static void fpga_stream0_irqhandler(void){
 	gtim_disable();  // Stop timer
 	STREAM_S0_RDY_REG->out_clr = stream0_irq_context->rdy_index;  // De-assert ready flag and pass to FPGA
 
-	stream0_irq_context->elapsed_ticks = gtim_counter();
+	stream0_irq_context->elapsed_ticks = gtim_get_counter();
 	vTaskNotifyGiveFromISR(stream0_irq_context->stream_task, NULL);
 
 	stream0_wait_rdy(stream0_irq_context->rdy_index, 0);  // This is optional the MCU is not fast enough to past this: Wait to ensure FPGA has disabled its IRQ trigger

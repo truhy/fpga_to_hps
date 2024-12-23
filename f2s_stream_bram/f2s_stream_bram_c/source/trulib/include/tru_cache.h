@@ -21,7 +21,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20241027
+	Version: 20241122
 */
 
 #ifndef TRU_CACHE_H
@@ -59,7 +59,7 @@ __STATIC_INLINE void MMU_InvalidateTLBIMVAA(uint32_t value){
 }
 #else
 // Multiprocessing Extensions: Invalidate unified TLB by MVA, all ASID
-__STATIC_INLINE void MMU_InvalidateTLBIMVAA(uint32_t value){
+static inline void MMU_InvalidateTLBIMVAA(uint32_t value){
 	__write_tlbimvaa(value);
 	__dsb();  // Ensure completion of the invalidation
 	__isb();  // Ensure instruction fetch path sees new state
