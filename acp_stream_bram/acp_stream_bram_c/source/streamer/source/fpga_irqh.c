@@ -42,7 +42,7 @@ static void fpga_stream0_irqhandler(void){
 	stream0_irq_context->elapsed_ticks = gtim_get_counter();
 	vTaskNotifyGiveFromISR(stream0_irq_context->stream_task, NULL);
 
-	stream0_wait_rdy(stream0_irq_context->rdy_index, 0);  // This is optional the MCU is not fast enough to past this: Wait to ensure FPGA has disabled its IRQ trigger
+	stream0_wait_rdy(stream0_irq_context->rdy_index, 0);  // This is optional, this CPU is not fast enough to pass this: Wait to ensure FPGA has disabled its IRQ trigger
 }
 
 void fpga_init(stream_t *stream0){
