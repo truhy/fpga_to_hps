@@ -21,7 +21,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20240405
+	Version: 20250405
 	Target : ARM Cortex-A9 on the DE10-Nano development board (Intel Cyclone V
 	         SoC FPGA)
 	Type   : Standalone C
@@ -31,16 +31,17 @@
 	The software on the HPS has a master role and the hardware design on the
 	FPGA has a slave role.  The FPGA waits for a signal before starting the
 	transfer process.  The HPS controls the transfers, whenever a transfer is
-	complete it measures the throughput, reads and verifies the data in the SDRAM
-	buffer.  It is interrupt and preemptive task (FreeRTOS) driven.
+	complete it measures the throughput, reads and verifies the data in the
+	SDRAM buffer.  It is interrupt and preemptive task (FreeRTOS) driven.
 
 	Transfer is made by the FPGA using the FPGA-to-SDRAM interface (F2S
-	interface).  Since the F2S interface does not support cache coherency access,
-	the SDRAM buffer region is set to non-cacheable using MMU table entries.
+	interface).  Since the F2S interface does not support cache coherency
+	access, the SDRAM buffer region is set to non-cacheable using MMU table
+	entries.
 
 	Parameters and flags are transmitted between the two sides over the
-	Lightweight HPS-to-FPGA bridge (L2F bridge), accessed with the Parallel IO IP
-	(PIO IP), which provides memory-mapped registers for the HPS.
+	Lightweight HPS-to-FPGA bridge (L2F bridge), accessed with the Parallel IO
+	IP (PIO IP), which provides memory-mapped registers for the HPS.
 
 	Process flow:
 		1.  The compiled hardware design file is downloaded to the FPGA
@@ -51,13 +52,15 @@
 		5.  The HPS application send parameters to the FPGA, starts a
 		    preemptive control task, starts a timer and asserts the ready signal
 		6.  The FPGA transfers data from FPGA BRAM to HPS SDRAM buffer
-		    defined by start address and size parameters received from HPS earlier
-		7.  When the transfer size is reached the FPGA asserts an interrupt trigger
-		    to generate one on the HPS, and then enters into a waiting state
+		    defined by start address and size parameters received from HPS
+		    earlier
+		7.  When the transfer size is reached the FPGA asserts an interrupt
+		    trigger to generate one on the HPS, and then enters into a waiting
+		    state
 		8.  The IRQ is raised on the HPS which jumps into the interrupt handler.
-		    The handler stops the timer, deasserts the ready signal to indicate the
-				FPGA to deassert the interrupt trigger, and then signals the preemptive
-				control task to process the data
+		    The handler stops the timer, deasserts the ready signal to indicate
+		    the FPGA to deassert the interrupt trigger, and then signals the
+		    preemptive control task to process the data
 		9.  The FPGA switches to another ready flag
 		10. The control task calculates the throughput of the transfer and
 		    verifies the transferred data
@@ -69,9 +72,9 @@
 	provides high resolution timer ticks (default 200MHz = 5ns).
 
 	Two separate ready flags are used for acknowledgement between the two sides.
-	They are organised as a 2 position cyclic buffer, where after a complete data
-	transfer each side (FPGA and HPS) switches to an opposite index.  This ensures
-	that each side will always use a different ready flag, which solves the
+	They are organised as a 2 position cyclic buffer, where after a complete
+	data transfer, each side (FPGA and HPS) switches to an opposite index.  This
+	ensures that each side always use a different ready flag which solves the
 	synchronisation problem of a flag being read and written at the same time.
 	
 	Limitations

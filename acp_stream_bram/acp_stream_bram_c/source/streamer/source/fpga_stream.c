@@ -187,7 +187,7 @@ bool stream_init(void){
 	stream0.buf_size = stream0.xfer_size << (stream0.num_variations - 1U);
 	stream0.buf_size_actual = stream0.buf_size + STREAM_F2H_MAX_BURST * STREAM_F2H_BYTE_BUS_WIDTH;  // Buffer size + extra for alignment
 	stream0.buf_addr_actual = (uint32_t *)malloc(stream0.buf_size_actual);  // Actual buffer
-	stream0.xfer_addr = tru_align_buffer_up(stream0.buf_addr_actual, STREAM_F2H_MAX_BURST * STREAM_F2H_BYTE_BUS_WIDTH);  // Align buffer to burst_len * bus_width
+	stream0.xfer_addr = (uint32_t *)TRU_INT_ALIGN_UP((uintptr_t)stream0.buf_addr_actual, STREAM_F2H_MAX_BURST * STREAM_F2H_BYTE_BUS_WIDTH);  // Align buffer to burst_len * bus_width
 	stream0.sample_ref = 0;
 
 	printf("Buffer region: 0x%.8x - 0x%.8x\n", stream0.xfer_addr, stream0.xfer_addr + stream0.buf_size);

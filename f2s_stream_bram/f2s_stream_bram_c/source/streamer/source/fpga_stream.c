@@ -30,6 +30,7 @@
 #include "tru_util_ll.h"
 #include "tru_cache.h"
 #include "tru_cortex_a9.h"
+#include "tru_mmu.h"
 
 // Arm CMSIS includes
 #include "RTE_Components.h"
@@ -193,38 +194,9 @@ bool stream0_setup_tasks(void){
 	return true;
 }
 
-// Change MMU table entry for a memory range to noncacheable
+// Change MMU table section entry for a memory range to non-cacheable
 void stream_mmap_noncacheable(void){
-	mmu_region_attributes_Type region = {
-		.rg_t = SECTION,
-		.domain = 0x0,
-		.e_t = ECC_DISABLED,
-		.g_t = GLOBAL,
-		.inner_norm_t = NON_CACHEABLE,  // L1 cache
-		.outer_norm_t = NON_CACHEABLE,  // L2 cache
-		.mem_t = NORMAL,
-		.sec_t = SECURE,
-		.xn_t = EXECUTE,
-		.priv_t = RW,
-		.user_t = RW,
-		.sh_t = SHARED
-	};
-	uint32_t L1_Section_Attrib_NonCache_RWX;  // Section attribute variable
-	uint32_t noncache_num_sections = (stream0.buf_size % 1048576UL) ? stream0.buf_size / 1048576UL + 1 : stream0.buf_size / 1048576UL;  // Calc number of 1MB MMU sections, roundup
-	uint32_t *mmu_ttb_l1 = get_mmu_ttb();
-
-	MMU_GetSectionDescriptor(&L1_Section_Attrib_NonCache_RWX, region);  // Fill section attribute variable
-	MMU_TTSection(mmu_ttb_l1, (uint32_t)stream0.xfer_addr, noncache_num_sections, DESCRIPTOR_FAULT);  // Replace the old translation table entry with an invalid (faulting) entry
-	// Clean not required with the Multiprocessing Extensions
-	//uint32_t offset = (uint32_t)stream0.xfer_addr >> 20U;
-	//tru_l1_data_clean_range(mmu_ttb_l1 + offset, 4U * noncache_num_sections);
-	__DSB();  // Ensure faulting entry is visible
-	tru_mmu_inv_range(mmu_ttb_l1, (uint32_t)stream0.xfer_addr, noncache_num_sections);  // Invalidate TLB entries by MVA with Multiprocessing Extension support
-	__set_BPIALL(0);  // Invalidate entire branch predictor array
-	__DSB();  // Ensure completion of the invalidate branch predictor operation
-	__ISB();  // Ensure changes visible to instruction fetch
-	MMU_TTSection(mmu_ttb_l1, (uint32_t)stream0.xfer_addr, noncache_num_sections, L1_Section_Attrib_NonCache_RWX);  // Write MMU table 1MB section entries that are non-cacheable
-	__DSB();  // Ensure the new entry is visible
+	tru_mmu_set_noncacheable_section(stream0.xfer_addr, stream0.buf_size);
 }
 
 bool stream_init(void){
@@ -252,7 +224,7 @@ bool stream_init(void){
 #ifdef DEBUG
 	stream0.buf_size_actual = stream0.buf_size + STREAM_F2S_MAX_BURST * STREAM_F2S_BYTE_BUS_WIDTH;  // Buffer size + extra for alignment
 	stream0.buf_addr_actual = (uint32_t *)malloc(stream0.buf_size_actual);  // Actual buffer
-	stream0.xfer_addr = tru_align_buffer_up(stream0.buf_addr_actual, STREAM_F2S_MAX_BURST * STREAM_F2S_BYTE_BUS_WIDTH);  // Align buffer to burst_len * bus_width
+	stream0.xfer_addr = (uint32_t *)TRU_INT_ALIGN_UP((uintptr_t)stream0.buf_addr_actual, STREAM_F2S_MAX_BURST * STREAM_F2S_BYTE_BUS_WIDTH);  // Align buffer to burst_len * bus_width
 #else
 	stream0.buf_size_actual = stream0.buf_size + 1048576UL;  // Buffer size + extra for alignment
 	stream0.buf_addr_actual = (uint32_t *)malloc(stream0.buf_size_actual);  // Actual buffer

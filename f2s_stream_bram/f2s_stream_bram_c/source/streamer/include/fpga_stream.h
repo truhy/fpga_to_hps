@@ -81,9 +81,9 @@
 #define PIO_S0_LEN_BASE  (TRU_HPS_L2F_BASE + 0x00000030UL)
 
 // PIO IP instances as type representation
-#define STREAM_S0_RDY_REG  ((tru_intel_pio_t *)PIO_S0_RDY_BASE)
-#define STREAM_S0_ADDR_REG ((tru_intel_pio_t *)PIO_S0_ADDR_BASE)
-#define STREAM_S0_LEN_REG  ((tru_intel_pio_t *)PIO_S0_LEN_BASE)
+#define STREAM_S0_RDY_REG  ((tru_intel_pio_reg_t *)PIO_S0_RDY_BASE)
+#define STREAM_S0_ADDR_REG ((tru_intel_pio_reg_t *)PIO_S0_ADDR_BASE)
+#define STREAM_S0_LEN_REG  ((tru_intel_pio_reg_t *)PIO_S0_LEN_BASE)
 
 // Host ready flag
 // Since the interrupt or process between the HPS and FPGA is asynchronous, we

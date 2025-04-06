@@ -21,7 +21,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20241110
+	Version: 20250405
 
 	Supporting code for PIO Core Intel FPGA IP (Parallel IO IP).
 
@@ -93,6 +93,6 @@ typedef struct{
 	volatile uint32_t irq_clr;
 	volatile uint32_t out_set;
 	volatile uint32_t out_clr;
-}tru_intel_pio_t;
+}tru_intel_pio_reg_t;
 
 #endif
