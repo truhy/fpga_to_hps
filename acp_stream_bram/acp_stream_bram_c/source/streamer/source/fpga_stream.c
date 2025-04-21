@@ -73,7 +73,7 @@ void process_samples(void){
 
 	// Process samples
 	for(uint32_t i = 0; i < num_samples; i++){
-		// Display the sample
+		// Display the sample (address, number, value).  Warning: enabling this will slow down the streaming to the serial to computer speed
 		//printf("A: 0x%.8x, S%.10u: %u\n", samples + i, i, samples[i]);
 
 		// Verify sample
@@ -111,8 +111,8 @@ void process_stream0(void){
 		stream0.iter_index = 0;
 		stream0.var_index++;
 		stream0.xfer_size <<= 1;
-		stream0_set_addr((uint32_t)stream0.xfer_addr, true);
-		stream0_set_len(stream0.xfer_size, true);  // Write new transfer length to FPGA
+		stream0_set_addr((uint32_t)stream0.xfer_addr, true);  // Send new DDR-3 RAM start address to FPGA
+		stream0_set_len(stream0.xfer_size, true);             // Send new transfer length to FPGA
 	}
 }
 
@@ -135,7 +135,7 @@ void stream0_task(void *parameters){
 	printf("Interface   : F2H bridge + ACP\n");
 	printf("Iteration(s): %lu\n", stream0.num_iterations);
 
-	stream0_assert_rdy();  // Signal FPGA to start streaming
+	stream0_assert_rdy();  // Signal FPGA to start a stream
 	while(1){
 		// Wait for notification
 		ulNotificationValue = ulTaskNotifyTake(pdTRUE, xMaxBlockTime);
@@ -143,12 +143,12 @@ void stream0_task(void *parameters){
 			process_stream0();
 
 			if(stream0.var_index < stream0.num_variations){
-				stream0_assert_rdy();  // Signal FPGA to continue streaming
+				stream0_assert_rdy();  // Signal FPGA to start another stream
 			}else{
 				printf("Finished\n");
 			}
 		}else{
-			// Timed=out
+			// Timed-out
 		}
 	}
 }
@@ -167,12 +167,12 @@ bool stream_init(void){
 	// Initialise stream object
 	stream0.rdy_index = FPGA_STREAM_HOST_RDY_1;
 
-	// F2H (FPGA to HPS) bridge buffer alignment
-	// =========================================
-	// We need to provide a buffer address to the FPGA so that it can fill up with samples using the F2H bridge
-	// The F2H bridge has two alignment bugs, the starting buffer alignment depends on:
+	// F2S + F2H bridge buffer alignment requirement on burst transfers
+	// ================================================================
+	// We need to provide a starting DDR-3 RAM address to the FPGA so that it knows where to fill samples over
+	// the bridge.  The bridge has two alignment bugs in burst mode, the starting buffer alignment depends on:
 	//   1. If the burst is less than 16, then the starting buffer address must be aligned to 32-bits (4 bytes)
-	//   2. If the burst is equal 16U, then the starting buffer address must be aligned to burst_len * bus_width
+	//   2. If the burst is equal 16, then the starting buffer address must be aligned to burst_len * bus_width
 	// We can apply these conditions by having an actual pointer and an aligned version of it.  Since condition 2
 	// is already 32-bits aligned, we don't need to apply condition 1 and simply apply condition 2
 	stream0.num_iterations = TEST_NUM_ITERATIONS;
