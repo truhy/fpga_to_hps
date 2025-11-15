@@ -14,7 +14,7 @@ A design with slave role to transfer data from FPGA to HPS over the FPGA-to-HPS 
 
 ## Results
 
-The highest that I managed to get are these transfer throughput results:
+The highest throughput rate I achieved:
 - F2H bridge + ACP, 128-bit, 200MHz, 128MB: **775.01 MB/s**
 
 For more results see the Excel file in the results folder.
