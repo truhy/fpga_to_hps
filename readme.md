@@ -4,13 +4,10 @@
 
 Projects for the DE10-Nano development board (Intel Cyclone V SoC FPGA) to test data transfers from FPGA to HPS.
 
-## Results
+## Data buses
 
-The highest that I managed to get are these transfer throughput results:
-- F2H bridge + ACP, 128-bit, 200MHz, 128MB: **775.01 MB/s**
-- F2S interface, 256-bit, 200MHz, 256MB: **1782.62 MB/s**
-
-For more results see the Excel file in the results folder.
+The Cyclone V contains two types of data buses, ACP (FPGA-to-HPS + ACP cache support) and F2S (FPGA-to-SDRAM).
+Each bus is tested by a separate project, located inside a folder.
 
 ## Guide
 
