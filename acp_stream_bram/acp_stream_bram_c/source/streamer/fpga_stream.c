@@ -21,7 +21,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20251211
+	Version: 20251223
 */
 
 #include "fpga_irqh.h"
@@ -29,7 +29,7 @@
 // Trulib includes
 #include "tru_logger.h"
 #include "tru_irq.h"
-#include "tru_util_ll.h"
+#include "tru_iom.h"
 #include "arm/tru_cortex_a9.h"
 #include "c5soc/tru_c5soc_hps_clkmgr_ll.h"
 
@@ -188,7 +188,7 @@ bool stream_init(void){
 	stream0.buf_size = stream0.xfer_size << (stream0.num_variations - 1U);
 	stream0.buf_size_actual = stream0.buf_size + STREAM_F2H_MAX_BURST * STREAM_F2H_BYTE_BUS_WIDTH;  // Buffer size + extra for alignment
 	stream0.buf_addr_actual = (uint32_t *)malloc(stream0.buf_size_actual);  // Actual buffer
-	stream0.xfer_addr = (uint32_t *)TRU_INT_ALIGN_UP((uintptr_t)stream0.buf_addr_actual, STREAM_F2H_MAX_BURST * STREAM_F2H_BYTE_BUS_WIDTH);  // Align buffer to burst_len * bus_width
+	stream0.xfer_addr = (uint32_t *)INT_ALIGN_UP((uintptr_t)stream0.buf_addr_actual, STREAM_F2H_MAX_BURST * STREAM_F2H_BYTE_BUS_WIDTH);  // Align buffer to burst_len * bus_width
 	stream0.sample_ref = 0;
 
 	printf("Buffer region: 0x%.8x - 0x%.8x\n", stream0.xfer_addr, stream0.xfer_addr + stream0.buf_size);

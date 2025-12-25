@@ -21,7 +21,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 	
-	Version: 20251211
+	Version: 20251223
 */
 
 #include "fpga_irqh.h"
@@ -29,7 +29,7 @@
 // Trulib includes
 #include "tru_logger.h"
 #include "tru_irq.h"
-#include "tru_util_ll.h"
+#include "tru_iom.h"
 #include "tru_cache.h"
 #include "arm/tru_cortex_a9.h"
 #include "c5soc/tru_c5soc_hps_clkmgr_ll.h"
@@ -200,11 +200,11 @@ bool stream_init(void){
 #ifdef DEBUG
 	stream0.buf_size_actual = stream0.buf_size + STREAM_F2S_MAX_BURST * STREAM_F2S_BYTE_BUS_WIDTH;  // Buffer size + extra for alignment
 	stream0.buf_addr_actual = (uint32_t *)malloc(stream0.buf_size_actual);  // Actual buffer
-	stream0.xfer_addr = (uint32_t *)TRU_INT_ALIGN_UP((uintptr_t)stream0.buf_addr_actual, STREAM_F2S_MAX_BURST * STREAM_F2S_BYTE_BUS_WIDTH);  // Align buffer to burst_len * bus_width
+	stream0.xfer_addr = (uint32_t *)INT_ALIGN_UP((uintptr_t)stream0.buf_addr_actual, STREAM_F2S_MAX_BURST * STREAM_F2S_BYTE_BUS_WIDTH);  // Align buffer to burst_len * bus_width
 #else
 	stream0.buf_size_actual = stream0.buf_size + 1048576UL;  // Buffer size + extra for alignment
 	stream0.buf_addr_actual = (uint32_t *)malloc(stream0.buf_size_actual);  // Actual buffer
-	stream0.xfer_addr = (uint32_t *)TRU_INT_ALIGN_UP((uintptr_t)stream0.buf_addr_actual, 1048576UL);  // Align buffer to 1MB
+	stream0.xfer_addr = (uint32_t *)INT_ALIGN_UP((uintptr_t)stream0.buf_addr_actual, 1048576UL);  // Align buffer to 1MB
 	stream_mmap_noncacheable();
 #endif
 
@@ -217,7 +217,7 @@ bool stream_init(void){
 	// It is 1/4 of the processor clock.  On the DE10-Nano processor clock is normally 800MHz, in this case the MPU peripheral clock is 800/4 = 200MHz
 	stream0.elapsed_tick_freq = get_mpu_peri_clk(TRU_HPS_INPUT_CLK_HZ).fout;  // Get MCU peripheral base clock
 
-	tru_iom_wr32((uint32_t *)0xffc25080UL, 0x3fffU);  // Release out of reset the FPGA SDRAM controller ports
+	iom_wr32((uint32_t *)0xffc25080UL, 0x3fffU);  // Release out of reset the FPGA SDRAM controller ports
 	//tru_iom_wr32((uint32_t *)0xffc2505cUL, 0xaU);  // Set appycfg bit
 	tru_irq_init();
 	fpga_init(&stream0);  // Init FPGA to HPS IRQ

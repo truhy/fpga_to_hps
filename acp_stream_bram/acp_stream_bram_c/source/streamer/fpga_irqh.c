@@ -21,12 +21,11 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20251211
+	Version: 20251223
 */
 
 // My includes
 #include "fpga_irqh.h"
-#include "tru_util_ll.h"
 #include "tru_irq.h"
 #include "arm/tru_cortex_a9.h"
 
