@@ -21,17 +21,16 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20251223
+	Version: 20260707
 */
 
 #include "fpga_irqh.h"
 
 // Trulib includes
 #include "tru_logger.h"
-#include "tru_irq.h"
 #include "tru_iom.h"
 #include "arm/tru_cortex_a9.h"
-#include "c5soc/tru_c5soc_hps_clkmgr_ll.h"
+#include "c5soc/tru_clkmgr_c5soc.h"
 
 // FreeRTOS includes
 #include "FreeRTOS.h"
@@ -198,13 +197,11 @@ bool stream_init(void){
 	// It is 1/4 of the processor clock.  On the DE10-Nano processor clock is normally 800MHz, in this case the MPU peripheral clock is 800/4 = 200MHz
 	stream0.elapsed_tick_freq = get_mpu_peri_clk(TRU_HPS_INPUT_CLK_HZ).fout;  // Get MCU peripheral base clock
 
-	tru_irq_init();
 	fpga_init(&stream0);  // Init FPGA to HPS IRQ
 	return stream0_setup_tasks();
 }
 
 void stream_deinit(void){
-	tru_irq_deinit();
 	fpga_deinit();
 
 	free(stream0.rateavg_results);

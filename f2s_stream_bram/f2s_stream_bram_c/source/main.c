@@ -21,7 +21,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20250405
+	Version: 20260707
 	Target : ARM Cortex-A9 on the DE10-Nano development board (Intel Cyclone V
 	         SoC FPGA)
 	Type   : Standalone C
@@ -80,9 +80,9 @@
 	Limitations
 
 	This design is not optimised because it uses only a single SDRAM buffer
-	region.  Consider a continuous acquisition scenario, the interrupt and
-	processing delay is deadtime which may create gaps in the acquisition.  A
-	double-buffer may help to prevent this.
+	region.  In a continuous acquisition scenario, the interrupt and processing
+	delay is deadtime which may create gaps in the acquisition.  A double-buffer
+	may help to prevent this.
 */
 
 // My includes
@@ -97,14 +97,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#ifdef SEMIHOSTING
-	extern void initialise_monitor_handles(void);  // Reference function header from the external Semihosting library
-#endif
-
 int main(int argc, char **argv){
-	#ifdef SEMIHOSTING
-		initialise_monitor_handles();  // Initialise Semihosting
-	#endif
+	tru_bsp_init();
 
 	if(stream_init()){
 		vTaskStartScheduler();  // Start the FreeRTOS preemptive scheduler

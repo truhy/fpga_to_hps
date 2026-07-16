@@ -21,19 +21,17 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 	
-	Version: 20251223
+	Version: 20260707
 */
 
 #include "fpga_irqh.h"
 
 // Trulib includes
 #include "tru_logger.h"
-#include "tru_irq.h"
 #include "tru_iom.h"
 #include "tru_cache.h"
 #include "arm/tru_cortex_a9.h"
-#include "c5soc/tru_c5soc_hps_clkmgr_ll.h"
-#include "tru_mmu.h"
+#include "c5soc/tru_clkmgr_c5soc.h"
 
 // Arm CMSIS includes
 #include "RTE_Components.h"
@@ -170,9 +168,44 @@ bool stream0_setup_tasks(void){
 	return true;
 }
 
-// Change MMU table section entry for a memory range to non-cacheable
+// Change MMU table 1MB page section entries to non-cacheable for the given memory range
 void stream_mmap_noncacheable(void){
-	tru_mmu_set_noncacheable_section(stream0.xfer_addr, stream0.buf_size);
+	// Memory range
+	uint32_t start_addr = (uint32_t)stream0.xfer_addr;
+	uint32_t mem_size = stream0.buf_size;
+
+	if(mem_size){
+		mmu_region_attributes_Type region = {
+			.rg_t = SECTION,
+			.domain = 0x0,
+			.e_t = ECC_DISABLED,
+			.g_t = GLOBAL,
+			.inner_norm_t = NON_CACHEABLE,  // L1 cache
+			.outer_norm_t = NON_CACHEABLE,  // L2 cache
+			.mem_t = NORMAL,
+			.sec_t = SECURE,
+			.xn_t = EXECUTE,
+			.priv_t = RW,
+			.user_t = RW,
+			.sh_t = SHARED
+		};
+		uint32_t L1_Section_Attrib_NonCache_RWX;  // Section attribute variable
+		uint32_t noncache_num_sections = (mem_size % 1048576UL) ? mem_size / 1048576UL + 1 : mem_size / 1048576UL;  // Calc number of 1MB MMU sections rounding up
+		uint32_t *mmu_ttb_l1 = mmu_get_ttb_l1();
+
+		MMU_GetSectionDescriptor(&L1_Section_Attrib_NonCache_RWX, region);  // Fill section attribute variable
+		MMU_TTSection(mmu_ttb_l1, start_addr, noncache_num_sections, DESCRIPTOR_FAULT);  // Replace the old translation table entry with an invalid (faulting) entry
+		// Clean of page entries is not required because Cortex-A9 has Multiprocessing Extensions
+		//uint32_t offset = start_addr >> 20U;
+		//tru_l1_data_clean_range(mmu_ttb_l1 + offset, 4U * noncache_num_sections);
+		__DSB();  // Ensure faulting entry is visible
+		MMU_InvalidateRange(mmu_ttb_l1, start_addr, noncache_num_sections);  // Invalidate TLB entries by MVA with Multiprocessing Extension support
+		__set_BPIALL(0);  // Invalidate entire branch predictor array
+		__DSB();  // Ensure completion of the invalidate branch predictor operation
+		__ISB();  // Ensure changes visible to instruction fetch
+		MMU_TTSection(mmu_ttb_l1, start_addr, noncache_num_sections, L1_Section_Attrib_NonCache_RWX);  // Write MMU table 1MB section entries that are non-cacheable
+		__DSB();  // Ensure the new entry is visible
+	}
 }
 
 bool stream_init(void){
@@ -217,15 +250,13 @@ bool stream_init(void){
 	// It is 1/4 of the processor clock.  On the DE10-Nano processor clock is normally 800MHz, in this case the MPU peripheral clock is 800/4 = 200MHz
 	stream0.elapsed_tick_freq = get_mpu_peri_clk(TRU_HPS_INPUT_CLK_HZ).fout;  // Get MCU peripheral base clock
 
-	iom_wr32((uint32_t *)0xffc25080UL, 0x3fffU);  // Release out of reset the FPGA SDRAM controller ports
-	//tru_iom_wr32((uint32_t *)0xffc2505cUL, 0xaU);  // Set appycfg bit
-	tru_irq_init();
+	iom_wr32(0xffc25080UL, 0x3fffU);  // Release the FPGA SDRAM controller ports from reset
+	//tru_iom_wr32(0xffc2505cUL, 0xaU);  // Set appycfg bit (not needed)
 	fpga_init(&stream0);  // Init FPGA to HPS IRQ
 	return stream0_setup_tasks();
 }
 
 void stream_deinit(void){
-	tru_irq_deinit();
 	fpga_deinit();
 
 	free(stream0.rateavg_results);

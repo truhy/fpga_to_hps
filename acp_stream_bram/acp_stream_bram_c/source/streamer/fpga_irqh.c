@@ -21,13 +21,16 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20251223
+	Version: 20260707
 */
 
 // My includes
 #include "fpga_irqh.h"
-#include "tru_irq.h"
 #include "arm/tru_cortex_a9.h"
+
+// Arm CMSIS includes
+#include "RTE_Components.h"   // CMSIS
+#include CMSIS_device_header  // CMSIS
 
 // FreeRTOS includes
 #include "FreeRTOS.h"
@@ -55,17 +58,16 @@ void fpga_init(stream_t *stream0){
 	stream0_set_len(stream0->xfer_size, true);  // Pass parameter to FPGA
 
 	// Register and enable the specified IRQ
-	tru_irq_register(
-		TRU_IRQ_SPI_F2H0,            // IRQ ID
-		TRU_GIC_DIST_CPU0,           // CPU0
-		TRU_GIC_PRIORITY_LEVEL29_7,  // Set lower priority than FreeRTOS tick interrupt handler
-		fpga_stream0_irqhandler      // Register user interrupt handler
-	);
+	IRQ_SetHandler(C5SOC_F2H0_IRQn, fpga_stream0_irqhandler);  // Register user interrupt handler
+	IRQ_SetPriority(C5SOC_F2H0_IRQn, GIC_IRQ_PRIORITY_LEVEL29_7);  // Set low priority
+	IRQ_SetMode(C5SOC_F2H0_IRQn, IRQ_MODE_TYPE_IRQ | IRQ_MODE_CPU_0 | IRQ_MODE_TRIG_LEVEL | IRQ_MODE_TRIG_LEVEL_HIGH);
+	IRQ_Enable(C5SOC_F2H0_IRQn);  // Enable the interrupt
 
 	gtim_setup_basic_mode();  // Setup global timer in basic mode
 }
 
 void fpga_deinit(void){
-	tru_irq_unregister(TRU_IRQ_SPI_F2H0);
+	IRQ_Disable(C5SOC_F2H0_IRQn);                      // Disable user interrupt handler
+	IRQ_SetHandler(C5SOC_F2H0_IRQn, (IRQHandler_t)0);  // Unregister user interrupt handler
 	stream0_irq_context = NULL;
 }

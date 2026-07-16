@@ -21,7 +21,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 
-	Version: 20251211
+	Version: 20260707
 */
 
 #ifndef FPGA_STREAM_H
@@ -29,7 +29,7 @@
 
 // My includes
 #include "c5soc/tru_altera_pio.h"
-#include "c5soc/tru_c5soc_hps_ll.h"
+#include "c5soc/tru_hps_c5soc.h"
 
 // FreeRTOS includes
 #include "FreeRTOS.h"

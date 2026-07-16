@@ -1,5 +1,5 @@
 # This is free script released into the public domain.
-# GNU make file v20240120 created by Truong Hy.
+# GNU make file v20260707 created by Truong Hy.
 #
 # Builds bare-metal source for the Intel Cyclone V SoC.
 # Depending on the options it will output the following application files:
@@ -62,11 +62,11 @@ SRCS := \
 	$(wildcard $(APP_SRC_PATH1)/trulib/c5soc/*.c) \
 	$(wildcard $(APP_SRC_PATH1)/CMSIS/Core/Source/*.c) \
 	$(wildcard $(APP_SRC_PATH1)/CMSIS/Device/c5soc/source/*.c) \
-	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/Source/*.c) \
-	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/Source/portable/Common/*.c) \
-	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/Source/portable/MemMang/*.c) \
-	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/Source/portable/GCC/ARM_CA9/*.c) \
-	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/Source/portable/GCC/ARM_CA9/*.S) \
+	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/FreeRTOS-Kernel/*.c) \
+	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/FreeRTOS-Kernel/portable/Common/*.c) \
+	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/FreeRTOS-Kernel/portable/MemMang/*.c) \
+	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/FreeRTOS-Kernel/portable/GCC/ARM_CA9/*.c) \
+	$(wildcard $(APP_SRC_PATH1)/FreeRTOS/FreeRTOS-Kernel/portable/GCC/ARM_CA9/*.S) \
 	$(wildcard $(APP_SRC_PATH1)/streamer/*.c)
 
 # Remove exclude files
@@ -80,8 +80,8 @@ INCS := \
 	-I$(APP_SRC_PATH1)/CMSIS/Core/Include \
 	-I$(APP_SRC_PATH1)/CMSIS/Core/Include/a-profile \
 	-I$(APP_SRC_PATH1)/CMSIS/Device/c5soc/include \
-	-I$(APP_SRC_PATH1)/FreeRTOS/Source/include \
-	-I$(APP_SRC_PATH1)/FreeRTOS/Source/portable/GCC/ARM_CA9 \
+	-I$(APP_SRC_PATH1)/FreeRTOS/FreeRTOS-Kernel/include \
+	-I$(APP_SRC_PATH1)/FreeRTOS/FreeRTOS-Kernel/portable/GCC/ARM_CA9 \
 	-I$(APP_SRC_PATH1)/streamer
 
 # The linker script to use
